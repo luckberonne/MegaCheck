@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaCheck", "MegaCheck\MegaCheck.csproj", "{34DB0AF1-2749-4457-99B8-0D654FF5619D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaCheck.Client", "MegaCheck.Client\MegaCheck.Client.csproj", "{1CDED59E-5357-4F4B-A8DC-717D9EED1EB2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34DB0AF1-2749-4457-99B8-0D654FF5619D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34DB0AF1-2749-4457-99B8-0D654FF5619D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34DB0AF1-2749-4457-99B8-0D654FF5619D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34DB0AF1-2749-4457-99B8-0D654FF5619D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CDED59E-5357-4F4B-A8DC-717D9EED1EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CDED59E-5357-4F4B-A8DC-717D9EED1EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CDED59E-5357-4F4B-A8DC-717D9EED1EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CDED59E-5357-4F4B-A8DC-717D9EED1EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FDBF5E0-0AD6-4332-9A51-C0BD427978BB}
+	EndGlobalSection
+EndGlobal

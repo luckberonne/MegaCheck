@@ -1,0 +1,62 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.SignalR.Client
+@rendermode InteractiveWebAssembly
+
+<h3>CheckboxSync</h3>
+
+<Virtualize Items="@checkboxes" ItemSize="30">
+    <ItemContent>
+        @* Renderizar cada checkbox *@
+        <input type="checkbox" checked="@context.IsChecked" @onchange="@(e => OnCheckboxChanged(context.Id, e.Value.ToString()))" />
+    </ItemContent>
+</Virtualize>
+
+@code {
+    private HubConnection hubConnection;
+    private List<CheckboxItem> checkboxes = new List<CheckboxItem>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(Navigation.ToAbsoluteUri("/checkboxHub"))
+            .Build();
+
+        hubConnection.On<int, bool>("ReceiveCheckboxUpdate", (id, isChecked) =>
+        {
+            var checkbox = checkboxes.FirstOrDefault(c => c.Id == id);
+            if (checkbox != null)
+            {
+                checkbox.IsChecked = isChecked;
+                InvokeAsync(StateHasChanged);
+                // JSRuntime.InvokeVoidAsync("showToaster", $"Checkbox {id} was changed to {(isChecked ? "checked" : "unchecked")}");
+            }
+        });
+
+        await hubConnection.StartAsync();
+
+        checkboxes = Enumerable.Range(1, 1000000)
+                               .Select(id => new CheckboxItem { Id = id, IsChecked = false })
+                               .ToList();
+    }
+
+    private async Task OnCheckboxChanged(int checkboxId, string isChecked)
+    {
+        bool isCheckedValue = bool.Parse(isChecked);
+
+        var checkbox = checkboxes.FirstOrDefault(c => c.Id == checkboxId);
+        if (checkbox != null)
+        {
+            checkbox.IsChecked = isCheckedValue;
+        }
+
+        await hubConnection.SendAsync("UpdateCheckboxState", checkboxId, isCheckedValue);
+    }
+
+    public class CheckboxItem
+    {
+        public int Id { get; set; }
+        public bool IsChecked { get; set; }
+    }
+}
